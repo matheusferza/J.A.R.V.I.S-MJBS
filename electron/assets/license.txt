@@ -1,0 +1,11 @@
+Model Information:
+* title:	Free_basemesh_head_man
+* source:	https://sketchfab.com/3d-models/free-basemesh-head-man-7a8eb467c52d4796919af35b0cc2cef8
+* author:	mono (https://sketchfab.com/michela.000)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Free_basemesh_head_man" (https://sketchfab.com/3d-models/free-basemesh-head-man-7a8eb467c52d4796919af35b0cc2cef8) by mono (https://sketchfab.com/michela.000) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' app: data: blob: 'unsafe-inline' 'unsafe-eval' ws: http: https:; script-src 'self' app: 'unsafe-inline' 'unsafe-eval'; style-src 'self' app: 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' app: data: https://fonts.gstatic.com;"
+    />
+    <title>M.J.B.S AI</title>
+    <!-- Import Map corrigido para Electron -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../node_modules/three/build/three.module.js",
+          "three/addons/": "../node_modules/three/examples/jsm/",
+          "@pixiv/three-vrm": "../node_modules/@pixiv/three-vrm/lib/three-vrm.module.js",
+          "gsap": "../node_modules/gsap/index.js"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="avatar.css" />
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+    <div class="scanlines"></div>
+
+    <main class="hud-shell">
+      <!-- Cabeçalho Principal -->
+      <header>
+        <div class="brand">
+          <span class="brand-mark">M.J.B.S</span>
+          <h1>J.A.R.V.I.S</h1>
+          <p>JUST A RATHER VERY INTELLIGENT SYSTEM</p>
+        </div>
+        <div class="header-status">
+          <span class="live-dot"></span> NEURAL LINK <b id="connection">CONNECTING</b>
+        </div>
+      </header>
+
+      <!-- Dashboard Principal -->
+      <section class="dashboard">
+        <!-- Painel Esquerdo: Telemetria -->
+        <aside class="panel system-panel">
+          <div class="panel-title">SYSTEM TELEMETRY <i>LIVE</i></div>
+          <div id="system-widgets"></div>
+          <div class="network-box">
+            <span>NETWORK IDENTIFICATION</span>
+            <strong id="ip-value">—</strong>
+            <small id="network-value">ACQUIRING SIGNAL</small>
+          </div>
+        </aside>
+
+        <!-- Estágio Central: ARC Core e Holograma -->
+        <section class="core-stage">
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+
+          <div class="orb-label top-label">ARC CORE // ONLINE</div>
+
+          <!-- Holograma do Vídeo Animado -->
+          <!-- Pode remover ou comentar esta div inteira -->
+          <!--
+          <div class="portrait-hologram" aria-hidden="true">
+            <video id="jarvis-avatar" loop muted playsinline class="avatar-hologram">
+              <source src="assets/jarvis-avatar.mp4" type="video/mp4" />
+            </video>
+            <span class="portrait-scan"></span>
+          </div>
+          -->
+
+          <!-- Reator Arc Central -->
+          <div id="orb">
+            <div class="ring ring-one"></div>
+            <div class="ring ring-two"></div>
+            <div class="ring ring-three"></div>
+            <div class="radar"></div>
+            <div class="audio-bars" id="audio-bars"></div>
+            <div class="core">
+              <span>M.J.B.S</span>
+              <small>AI CORE</small>
+            </div>
+          </div>
+
+          <div class="orb-label bottom-label" id="orb-status">AWAITING COMMAND</div>
+          <canvas id="three-canvas"></canvas>
+        </section>
+
+        <!-- Painel Direito: Chat / Conversa -->
+        <aside class="panel conversation-panel">
+          <div class="panel-title">CONVERSATION STREAM <i id="chat-state">READY</i></div>
+          <div id="conversation" aria-live="polite"></div>
+          <form id="command-form">
+            <input id="command-input" autocomplete="off" placeholder="Digite um comando..." />
+            <button id="send-button" title="Enviar">›</button>
+            <button type="button" id="mic-button" title="Ativar microfone">◉</button>
+          </form>
+        </aside>
+      </section>
+
+      <!-- Rodapé HUD -->
+      <footer>
+        <div>
+          <span>LOCAL TIME</span>
+          <b id="clock">--:--:--</b>
+        </div>
+        <div>
+          <span>DATE</span>
+          <b id="date">---</b>
+        </div>
+        <div>
+          <span>SYSTEM</span>
+          <b class="ok">NOMINAL</b>
+        </div>
+        <div>
+          <span>LATENCY</span>
+          <b id="latency">-- ms</b>
+        </div>
+        <div>
+          <span>MICROPHONE</span>
+          <b id="mic-state">STANDBY</b>
+        </div>
+        <div>
+          <span>AI</span>
+          <b class="ok">ONLINE</b>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module" src="renderer.js"></script>
+  </body>
+</html>

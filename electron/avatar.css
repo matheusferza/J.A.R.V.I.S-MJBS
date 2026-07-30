@@ -1,0 +1,201 @@
+/* ==========================================================================
+   JARVIS / M.J.B.S AI - HOLOGRAPHIC AVATAR STYLES
+   ========================================================================== */
+
+/* Isolamento de contexto do palco */
+.core-stage {
+  isolation: isolate;
+}
+
+/* Container do Holograma (Rosto trazido para a FRENTE com z-index alto) */
+.portrait-hologram {
+  display: none !important;
+  position: absolute;
+  z-index: 5;
+  /* Altere de '5% 12% 3%' para subirmos a base */
+  inset: 2% 12% 8%; /* Sobe a imagem afastando do texto inferior */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 18px rgba(0, 217, 255, 0.4));
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 60%, transparent 85%);
+  pointer-events: none;
+}
+
+/* Suporte ao Vídeo do Avatar */
+.portrait-hologram video,
+.avatar-hologram {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Mude de '50% 72%' para 'center 35%' (foca mais na parte superior do vídeo) */
+  object-position: center 20%;
+  transform: scale(0.85); /* Reduz um pouco o zoom para o rosto caber por inteiro */
+  mix-blend-mode: screen;
+  filter: saturate(1.25) contrast(1.1);
+  animation:
+    portrait-idle 7s ease-in-out infinite,
+    portrait-glow 3.5s ease-in-out infinite;
+}
+
+/* Camada de brilho e reflexo azul acianado */
+.portrait-hologram::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 217, 255, 0.12),
+    transparent 42%,
+    rgba(0, 217, 255, 0.1)
+  );
+  mix-blend-mode: screen;
+  animation: portrait-shift 9s ease-in-out infinite;
+}
+
+/* Efeito de Scanner passando na vertical */
+.portrait-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, rgba(84, 239, 255, 0.34), transparent);
+  mix-blend-mode: screen;
+  filter: blur(2px);
+  animation: portrait-scan 5s linear infinite;
+}
+
+/* --- Camadas Z-Index & Estilo do Reator Arc de Fundo --- */
+#three-canvas {
+  z-index: 1;
+}
+
+/* Reator Arc / Órbita (Posicionado ATRÁS do avatar e opaco) */
+#orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(38vw, 440px);
+  height: min(38vw, 440px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  z-index: 2; /* Fica atrás do portrait-hologram */
+  opacity: 0.35; /* Círculo suave e translúcido como fundo */
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.2));
+  transition: opacity 0.4s ease;
+}
+
+/* Anéis do reator mais discretos */
+.ring {
+  opacity: 0.4;
+}
+
+/* Radar central suave */
+.radar {
+  opacity: 0.25;
+}
+
+/* Núcleo translúcido */
+.core {
+  background: radial-gradient(
+    circle,
+    rgba(223, 255, 255, 0.15) 0%,
+    rgba(25, 204, 233, 0.1) 36%,
+    rgba(3, 27, 37, 0.4) 70%
+  );
+  box-shadow:
+    0 0 10px rgba(0, 217, 255, 0.3),
+    inset 0 0 10px rgba(223, 255, 255, 0.2);
+}
+
+.core span,
+.core small {
+  opacity: 0.5;
+}
+
+.corner,
+.orb-label {
+  z-index: 6;
+}
+
+/* --- Estados Dinâmicos do JARVIS --- */
+
+/* 1. Estado: Processando / Pensando */
+.jarvis-thinking .portrait-hologram {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 36px rgba(0, 217, 255, 0.95));
+}
+
+.jarvis-thinking .portrait-hologram video,
+.jarvis-thinking .avatar-hologram {
+  animation-duration: 2s, 1.1s;
+}
+
+/* 2. Estado: Falando (Acionado via JS) */
+.jarvis-speaking #orb {
+  opacity: 0.5; /* Eleva suavemente a presença do fundo durante a fala */
+}
+
+.jarvis-speaking .portrait-hologram {
+  opacity: 1; /* Rosto em destaque total */
+}
+
+.jarvis-speaking .portrait-hologram video,
+.jarvis-speaking .avatar-hologram {
+  animation:
+    portrait-speaking 0.22s ease-in-out infinite alternate,
+    portrait-glow 0.65s ease-in-out infinite;
+}
+
+/* --- Keyframes & Animações --- */
+@keyframes portrait-idle {
+  0%,
+  100% {
+    transform: scale(1.01) translateY(0);
+  }
+  50% {
+    transform: scale(1.045) translateY(-9px);
+  }
+}
+
+@keyframes portrait-glow {
+  50% {
+    filter: saturate(1.7) brightness(1.18) contrast(1.18);
+  }
+}
+
+@keyframes portrait-shift {
+  0%,
+  100% {
+    transform: translateX(-8%);
+  }
+  50% {
+    transform: translateX(8%);
+  }
+}
+
+@keyframes portrait-scan {
+  from {
+    transform: translateY(-500%);
+  }
+  to {
+    transform: translateY(600%);
+  }
+}
+
+@keyframes portrait-speaking {
+  to {
+    transform: scale(1.035, 1.018) translateY(-2px);
+    filter: saturate(1.8) brightness(1.28);
+  }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 700px) {
+  .portrait-hologram {
+    inset: 8% 5%;
+  }
+}

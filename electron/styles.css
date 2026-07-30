@@ -1,0 +1,608 @@
+/* ==========================================================================
+   JARVIS / M.J.B.S AI - MAIN HUD STYLESHEET
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* --- Variáveis Globais --- */
+:root {
+  --cyan: #00d9ff;
+  --dim: #0a7d95;
+  --ink: #02070c;
+  --glass: rgba(5, 32, 42, 0.54);
+  --line: rgba(0, 217, 255, 0.27);
+}
+
+/* --- Resets e Base --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 42%, #063040 0, #020b12 30%, #010408 72%);
+  color: #b9f5ff;
+  font-family: 'Rajdhani', Arial, sans-serif;
+  letter-spacing: 0.1em;
+}
+
+/* --- Camadas de Fundo --- */
+#particles,
+.scanlines,
+#three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.scanlines {
+  opacity: 0.16;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0, 217, 255, 0.035) 4px 5px);
+}
+
+/* --- Estrutura Principal (HUD Shell) --- */
+.hud-shell {
+  position: relative;
+  height: 100vh;
+  padding: 22px 30px 16px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 17px;
+  background:
+    linear-gradient(90deg, rgba(0, 217, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+  background-size: 74px 74px;
+}
+
+header,
+footer,
+.panel {
+  border: 1px solid var(--line);
+  background: linear-gradient(120deg, rgba(8, 42, 55, 0.55), rgba(2, 12, 18, 0.38));
+  box-shadow:
+    inset 0 0 22px rgba(0, 217, 255, 0.035),
+    0 0 20px rgba(0, 166, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+/* --- Cabeçalho (Header) --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 17px;
+  clip-path: polygon(0 0, 98% 0, 100% 24%, 100% 100%, 2% 100%, 0 70%);
+}
+
+.brand {
+  position: relative;
+  padding-left: 20px;
+}
+
+.brand::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  border-left: 2px solid var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.brand-mark {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  color: var(--cyan);
+}
+
+h1 {
+  font:
+    600 25px 'Orbitron',
+    sans-serif;
+  margin: 1px 0;
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 12px var(--cyan);
+}
+
+.brand p {
+  margin: 0;
+  font:
+    10px 'Orbitron',
+    sans-serif;
+  color: #6bb8c8;
+}
+
+.header-status {
+  font:
+    11px 'Orbitron',
+    sans-serif;
+  color: #7babb4;
+}
+
+.header-status b {
+  color: var(--cyan);
+  margin-left: 7px;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background: #1cff99;
+  box-shadow: 0 0 10px #1cff99;
+  margin-right: 6px;
+  animation: blink 1.2s infinite;
+}
+
+/* --- Dashboard Grid --- */
+.dashboard {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(420px, 1.55fr) minmax(270px, 1fr);
+  gap: 18px;
+}
+
+.panel {
+  min-height: 0;
+  padding: 16px;
+  position: relative;
+}
+
+.panel::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: 18px;
+  width: 34px;
+  border-top: 2px solid var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.panel-title {
+  font:
+    600 11px 'Orbitron',
+    sans-serif;
+  color: #dbfbff;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.panel-title i {
+  font-style: normal;
+  float: right;
+  font-size: 8px;
+  color: #1cff99;
+}
+
+/* --- Métricas e Rede --- */
+.metric {
+  margin: 13px 0;
+}
+
+.metric div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.metric span {
+  font-size: 11px;
+  color: #77b8c3;
+}
+
+.metric b {
+  font:
+    600 14px 'Orbitron',
+    sans-serif;
+  color: #e4fdff;
+}
+
+.bar {
+  height: 3px;
+  margin-top: 6px;
+  background: #082b36;
+}
+
+.bar i {
+  height: 100%;
+  display: block;
+  background: var(--cyan);
+  box-shadow: 0 0 7px var(--cyan);
+  transition: width 0.6s ease;
+}
+
+.network-box {
+  border-top: 1px solid var(--line);
+  margin-top: 26px;
+  padding-top: 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.network-box span {
+  font:
+    9px 'Orbitron',
+    sans-serif;
+  color: #6599a4;
+}
+
+.network-box strong {
+  font:
+    600 17px 'Orbitron',
+    sans-serif;
+  color: var(--cyan);
+}
+
+.network-box small {
+  font-size: 10px;
+  color: #99c8d1;
+}
+
+/* --- Estágio Central (Core Stage / Holograma) --- */
+.core-stage {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.1), transparent 48%);
+}
+
+.corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--cyan);
+  z-index: 6;
+}
+
+.tl {
+  left: 0;
+  top: 0;
+  border-left: 2px solid;
+  border-top: 2px solid;
+}
+.tr {
+  right: 0;
+  top: 0;
+  border-right: 2px solid;
+  border-top: 2px solid;
+}
+.bl {
+  left: 0;
+  bottom: 0;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+}
+.br {
+  right: 0;
+  bottom: 0;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.orb-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font:
+    10px 'Orbitron',
+    sans-serif;
+  color: #a9eaf6;
+  white-space: nowrap;
+  text-shadow: 0 0 8px var(--cyan);
+  z-index: 6;
+}
+
+.top-label {
+  top: 8%;
+}
+.bottom-label {
+  bottom: 8%;
+}
+
+/* --- Elementos Internos do Reator Arc --- */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--cyan);
+  animation: spin 10s linear infinite;
+}
+
+.ring::after {
+  content: '';
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 14px var(--cyan);
+  top: 12%;
+  left: 12%;
+}
+
+.ring-one {
+  inset: 0;
+  border-width: 2px;
+  border-right-color: transparent;
+  border-bottom-color: #006277;
+}
+
+.ring-two {
+  inset: 9%;
+  border-style: dashed;
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+.ring-three {
+  inset: 20%;
+  border-color: #25cce4 transparent #25cce4 transparent;
+  animation-duration: 4s;
+}
+
+.radar {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 72%,
+    rgba(0, 217, 255, 0.32) 90%,
+    transparent 110%
+  );
+  animation: spin 3.5s linear infinite;
+}
+
+.core {
+  position: relative;
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.core span {
+  font:
+    600 10px 'Orbitron',
+    sans-serif;
+  color: #021a22;
+  letter-spacing: 0;
+}
+
+.core small {
+  font:
+    7px 'Orbitron',
+    sans-serif;
+  color: #063642;
+}
+
+.audio-bars {
+  position: absolute;
+  bottom: 16%;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  height: 30px;
+}
+
+.audio-bars i {
+  width: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: wave 700ms infinite alternate;
+}
+
+/* --- Painel de Conversa (Chat) --- */
+.conversation-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+#conversation {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+  scrollbar-color: var(--dim) transparent;
+}
+
+.message {
+  padding: 9px 0 11px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+  animation: arrive 0.35s ease;
+}
+
+.message span {
+  font:
+    9px 'Orbitron',
+    sans-serif;
+  color: #63bcca;
+}
+
+.message p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  letter-spacing: 0.045em;
+  line-height: 1.28;
+}
+
+.message.user span {
+  color: #e5fbff;
+}
+.message.user p {
+  color: #dceef2;
+}
+.message.jarvis p {
+  color: #58e5fa;
+}
+
+/* Formulário de Input */
+form {
+  display: grid;
+  grid-template-columns: 1fr 34px 34px;
+  gap: 7px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+input,
+button {
+  border: 1px solid var(--line);
+  background: #061823;
+  color: #c8f8ff;
+  font:
+    11px 'Rajdhani',
+    sans-serif;
+  outline: 0;
+}
+
+input {
+  padding: 9px;
+  min-width: 0;
+}
+
+input:focus {
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.25);
+}
+
+button {
+  cursor: pointer;
+  color: var(--cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+button:hover,
+button.active {
+  background: var(--cyan);
+  color: #021017;
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* --- Rodapé (Footer) --- */
+footer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 8px 16px;
+  clip-path: polygon(0 0, 100% 0, 99% 100%, 1% 100%);
+}
+
+footer div {
+  border-right: 1px solid rgba(0, 217, 255, 0.14);
+  padding-left: 11px;
+}
+
+footer div:last-child {
+  border: 0;
+}
+
+footer span {
+  display: block;
+  font:
+    8px 'Orbitron',
+    sans-serif;
+  color: #659ba5;
+}
+
+footer b {
+  font:
+    600 12px 'Orbitron',
+    sans-serif;
+  color: #c8f9ff;
+}
+
+.ok,
+.online {
+  color: #23eaa7 !important;
+}
+
+/* --- Keyframes & Animações --- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes wave {
+  to {
+    height: 4px;
+  }
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1100px) {
+  .hud-shell {
+    padding: 14px;
+  }
+  .dashboard {
+    grid-template-columns: 220px 1fr;
+  }
+  .conversation-panel {
+    grid-column: 1 / -1;
+    min-height: 225px;
+  }
+  .core-stage {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    overflow: auto;
+  }
+  .hud-shell {
+    height: auto;
+    min-height: 100vh;
+  }
+  .dashboard {
+    display: block;
+  }
+  .panel,
+  .core-stage {
+    margin-bottom: 12px;
+  }
+  .system-panel {
+    display: none;
+  }
+  footer {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  header {
+    padding: 8px;
+  }
+  h1 {
+    font-size: 17px;
+  }
+  .header-status {
+    display: none;
+  }
+}
