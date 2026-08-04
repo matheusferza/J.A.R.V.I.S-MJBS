@@ -83,9 +83,8 @@ export class OrbRenderer {
     this._overlays = [];
     this._clippingPlane = null;
 
-    // Temporary toggle: disable overlays while debugging rendering issues
-    // Set to true later to re-enable circuit overlay once face is visible
-    this._enableOverlays = false;
+    // Temporary toggle: enable overlays (true to display circuit overlay)
+    this._enableOverlays = true;
 
     // ── Inicia carregamento e loop ───────────────────────────────────────────
     this.loadModel();
@@ -427,6 +426,7 @@ export class OrbRenderer {
   */
 
   _createCircuitOverlay(mesh) {
+    console.log('[OrbRenderer] _createCircuitOverlay CALLED for', mesh && mesh.name);
     try {
     // Rebuild overlay as a projected geodesic net with styled lines and glowing sprites
     const name = (mesh.name || '').toLowerCase();
@@ -722,6 +722,7 @@ export class OrbRenderer {
   } catch (err) {
       console.error('[OrbRenderer] _createCircuitOverlay CRASHED for mesh', mesh && mesh.name, err);
     }
+  }
 
   _setupScanline() {
     this.scanlineMat = new THREE.ShaderMaterial({
