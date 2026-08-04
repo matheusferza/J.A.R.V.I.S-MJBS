@@ -484,10 +484,16 @@ export class OrbRenderer {
     if (!mesh.geometry.boundingSphere) mesh.geometry.computeBoundingSphere();
     const bs = mesh.geometry.boundingSphere;
 
-    // Create an icosahedron (geodesic) and project its vertices onto the mesh surface via raycasting
+    // Compute world-scaled radius to account for parent/model scaling (VRM models often scaled via modelGroup)
+    const worldScaleVec = new THREE.Vector3();
+    mesh.getWorldScale(worldScaleVec);
+    const maxWorldScale = Math.max(worldScaleVec.x, worldScaleVec.y, worldScaleVec.z) || 1.0;
+    const worldRadius = bs.radius * maxWorldScale;
+
+    // Create an icosahedron (geodesic) used only for directions; use unit radius and normalize directions
     let detail = 3; // density (reduced to avoid dome effect)
     detail = Math.min(5, Math.max(2, detail));
-    const ico = new THREE.IcosahedronGeometry(bs.radius * 0.95, detail);
+    const ico = new THREE.IcosahedronGeometry(1.0, detail);
     const icoPos = ico.getAttribute('position');
 
     const raycaster = new THREE.Raycaster();
@@ -574,8 +580,11 @@ export class OrbRenderer {
         mesh.worldToLocal(p);
         projectedVerts.push(p.x, p.y, p.z);
       } else {
-        const fallback = tmpDir.clone().multiplyScalar(bs.radius * 0.95);
-        projectedVerts.push(fallback.x, fallback.y, fallback.z);
+        // Fallback: project in world space using worldRadius and convert back to mesh local
+        const fallbackWorld = tmpDirWorld.clone().multiplyScalar(worldRadius * 0.95);
+        const fallbackLocal = fallbackWorld.clone();
+        mesh.worldToLocal(fallbackLocal);
+        projectedVerts.push(fallbackLocal.x, fallbackLocal.y, fallbackLocal.z);
       }
     }
 
