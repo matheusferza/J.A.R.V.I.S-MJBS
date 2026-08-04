@@ -605,13 +605,16 @@ export class OrbRenderer {
       mesh.getWorldQuaternion(q);
       const tmpDirWorld = tmpDir.clone().applyQuaternion(q).normalize();
 
-      // Raycast: origin in world space (mesh center), direction in world space
-      raycaster.set(worldCenter, tmpDirWorld);
+      // Raycast: use an origin outside the bounding sphere and cast back towards the center
+      // This improves hits for partially open meshes (e.g., face meshes missing back-of-head geometry)
+      const rayOrigin = worldCenter.clone().add(tmpDirWorld.clone().multiplyScalar(worldRadius * 1.5));
+      const rayDirection = tmpDirWorld.clone().negate();
+      raycaster.set(rayOrigin, rayDirection);
       const intersects = raycaster.intersectObject(raycastTarget, true);
 
       // minimal debug: log first hit count for the first ray only
       if (i === 0) {
-        console.log('[OrbRenderer] raycast sample count', { meshName: mesh.name, usedBaked: !!mesh.isSkinnedMesh, intersectsCount: intersects.length });
+        console.log('[OrbRenderer] raycast sample count', { meshName: mesh.name, usedBaked: !!mesh.isSkinnedMesh, intersectsCount: intersects.length, rayOrigin: rayOrigin.toArray(), rayDirection: rayDirection.toArray() });
       }
 
       if (intersects && intersects.length > 0) {
