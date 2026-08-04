@@ -64,6 +64,13 @@ function createWindow() {
     app.quit();
   });
 
+  // Forward renderer console messages to the main process output for debugging
+  window.webContents.on('console-message', (event, level, message, line, sourceId) => {
+    const levelNames = ['LOG', 'WARNING', 'ERROR', 'INFO', 'DEBUG'];
+    const levelName = levelNames[level] || `LVL_${level}`;
+    console.log(`[renderer console ${levelName}] ${message} (${sourceId}:${line})`);
+  });
+
   window.webContents.on('unresponsive', () => {
     console.warn('⚠ Renderer process became unresponsive');
   });
