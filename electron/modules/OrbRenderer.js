@@ -153,33 +153,56 @@ export class OrbRenderer {
           child.castShadow = true;
           child.receiveShadow = true;
           // Skip hologram patch for eyes and mouth to preserve original shading and morph visibility
-          if (child.material && !isEye && !isMouth) {
-            // Attempt lightweight hologram patch for compatible materials
-            try {
-              this._patchMaterialForHologram(child.material);
-            } catch (e) {
-              console.warn('Patch hologram skipped for material', child.material?.name, e);
-            }
+          if (child.material && !isMouth) {
+            // Normalize material array handling
+            const mats = Array.isArray(child.material) ? child.material : [child.material];
 
-              // Additionally, dim the base skin/MToon materials to reveal only the overlay
+            // Attempt lightweight hologram patch for non-eye materials
+            mats.forEach((m) => {
+              if (!isEye && m) {
+                try { this._patchMaterialForHologram(m); } catch (e) { console.warn('Patch hologram skipped for material', m?.name, e); }
+              }
+            });
+
+            // Additionally, dim the base skin/MToon materials to reveal only the overlay
             try {
-              const mat = child.material;
-              const matNameLower = (mat.name || '').toLowerCase();
               const meshNameLower = (child.name || '').toLowerCase();
-              // Heuristic: only dim materials that are clearly face/skin related by mesh or material name
-              const looksLikeSkin = meshNameLower.includes('face') || matNameLower.includes('face') || matNameLower.includes('skin') || matNameLower.includes('face_');
+              const looksLikeSkin = meshNameLower.includes('face') || mats.some(m => ((m && m.name) || '').toLowerCase().includes('face') || ((m && m.name) || '').toLowerCase().includes('skin'));
               if (looksLikeSkin) {
-                // Make the base material partially transparent to preserve volume behind the overlay
-                mat.transparent = true;
-              // Set a conservative dim so the underlying face volume remains visible
-              try { mat.opacity = 0.06; } catch (e) {}
-              // Tint the base material to a deep desaturated blue so only a dark volume remains
-              try { if (mat.color) mat.color.set(0x001030); } catch (e) {}
-                try { mat.depthWrite = false; } catch (e) {}
-                mat.needsUpdate = true;
+                mats.forEach((mat) => {
+                  if (!mat) return;
+                  try { mat.transparent = true; } catch (e) {}
+                  try { mat.opacity = 0.06; } catch (e) {}
+                  try { if (mat.color) mat.color.set(0x001030); } catch (e) {}
+                  try { mat.depthWrite = false; } catch (e) {}
+                  try { mat.needsUpdate = true; } catch (e) {}
+                });
               }
             } catch (e) {
               // ignore
+            }
+
+            // Eye styling: prefer emissive cyan glow for iris/eye parts
+            if (isEye) {
+              mats.forEach((eyeMat, idx) => {
+                try {
+                  if (!eyeMat) return;
+                  if (eyeMat.emissive !== undefined) {
+                    try { eyeMat.emissive.set(0x00F0FF); } catch(e){}
+                    try { eyeMat.emissiveIntensity = 4.0; } catch(e){}
+                    try { if (eyeMat.color) eyeMat.color.set(0x001030); } catch(e){}
+                    try { eyeMat.transparent = false; } catch(e){}
+                    try { eyeMat.depthWrite = false; } catch(e){}
+                    try { eyeMat.needsUpdate = true; } catch(e){}
+                  } else {
+                    // Replace with simple emissive material (fast path)
+                    try {
+                      const newMat = new THREE.MeshStandardMaterial({ color: 0x001030, emissive: new THREE.Color(0x00F0FF), emissiveIntensity: 4.0, roughness: 0.1, metalness: 0.0 });
+                      if (Array.isArray(child.material)) child.material[idx] = newMat; else child.material = newMat;
+                    } catch (e) { /* ignore */ }
+                  }
+                } catch (e) { }
+              });
             }
           }
 
@@ -488,7 +511,8 @@ export class OrbRenderer {
     const worldScaleVec = new THREE.Vector3();
     mesh.getWorldScale(worldScaleVec);
     const maxWorldScale = Math.max(worldScaleVec.x, worldScaleVec.y, worldScaleVec.z) || 1.0;
-    const worldRadius = bs.radius * maxWorldScale;
+    const projectionRadiusFactor = 0.90; // smaller factor to keep plexus close to skin (tweak 0.85-0.92)
+    const worldRadius = bs.radius * maxWorldScale * projectionRadiusFactor;
 
     // Create an icosahedron (geodesic) used only for directions; use unit radius and normalize directions
     let detail = 3; // density (reduced to avoid dome effect)
@@ -664,8 +688,8 @@ export class OrbRenderer {
     if (outerPoints.length) outerPointGeo.setAttribute('position', new THREE.Float32BufferAttribute(outerPoints, 3));
 
     const primaryColor = 0x00F0FF; // cyan blue
-    const innerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.60, blending: THREE.AdditiveBlending, depthWrite: false });
-    const outerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.30, blending: THREE.AdditiveBlending, depthWrite: false });
+    const innerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false });
+    const outerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.28, blending: THREE.AdditiveBlending, depthWrite: false });
 
     if (!this._pointSpriteTexture) {
       const size = 64;
@@ -682,7 +706,7 @@ export class OrbRenderer {
     }
 
     const innerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: primaryColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false });
-    const outerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: primaryColor, transparent: true, opacity: 0.65, blending: THREE.AdditiveBlending, depthWrite: false });
+    const outerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: primaryColor, transparent: true, opacity: 0.30, blending: THREE.AdditiveBlending, depthWrite: false });
 
     const innerLines = innerPositions.length ? new THREE.LineSegments(innerLineGeo, innerLineMat) : null;
     const outerLines = outerPositions.length ? new THREE.LineSegments(outerLineGeo, outerLineMat) : null;
