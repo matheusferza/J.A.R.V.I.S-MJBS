@@ -581,6 +581,39 @@ export class OrbRenderer {
         // ensure temp mesh world matrix matches skinned mesh
         const bakedMesh = mesh.userData._bakedOverlayMesh;
         bakedMesh.matrixWorld.copy(mesh.matrixWorld);
+
+        // Diagnostic: compare sample baked vertex world positions vs applying mesh transforms
+        try {
+          const bakedGeo = bakedMesh.geometry;
+          const posAttr = bakedGeo.getAttribute('position');
+          const vcount = posAttr.count;
+          const sampleIdx = [0, Math.floor(vcount/2), Math.max(0, vcount-1)];
+          const samples = sampleIdx.map(idx => {
+            const lp = new THREE.Vector3().fromBufferAttribute(posAttr, idx);
+            const worldFromBaked = lp.clone();
+            bakedMesh.localToWorld(worldFromBaked);
+            const worldFromMesh = lp.clone();
+            mesh.localToWorld(worldFromMesh);
+            return {
+              idx,
+              local: lp.toArray(),
+              worldFromBaked: worldFromBaked.toArray(),
+              worldFromMesh: worldFromMesh.toArray(),
+            };
+          });
+
+          console.log('[OrbRenderer] baked-geo diagnostic', {
+            meshName: mesh.name,
+            bakedMeshMatrixWorld: bakedMesh.matrixWorld.elements ? bakedMesh.matrixWorld.elements.slice(0,16) : null,
+            meshMatrixWorld: mesh.matrixWorld.elements ? mesh.matrixWorld.elements.slice(0,16) : null,
+            samples,
+            skeletonPresent: !!mesh.skeleton,
+            boneCount: mesh.skeleton ? mesh.skeleton.bones.length : 0,
+          });
+        } catch (diagErr) {
+          console.warn('[OrbRenderer] baked-geo diagnostic failed for', mesh.name, diagErr && diagErr.message);
+        }
+
         raycastTarget = bakedMesh;
       } catch (err) {
         try {
@@ -592,7 +625,16 @@ export class OrbRenderer {
       }
     }
 
-    const projectedVerts = [];
+    // Diagnostic pass: compare the mesh's normal front-face raycast behaviour
+    // with DoubleSide. The latter is used for the actual projection so faces
+    // whose winding points away from the ray do not become artificial fallbacks.
+    const raycastMaterial = !Array.isArray(raycastTarget.material) ? raycastTarget.material : null;
+    const originalRaycastSide = raycastMaterial?.side;
+    const canCompareSides = typeof originalRaycastSide === 'number';
+    let frontSideHits = 0;
+    let doubleSideHits = 0;
+
+    const hitPoints = new Array(icoPos.count);
     const tmpVec = new THREE.Vector3();
     const tmpDir = new THREE.Vector3();
 
@@ -610,30 +652,73 @@ export class OrbRenderer {
       const rayOrigin = worldCenter.clone().add(tmpDirWorld.clone().multiplyScalar(worldRadius * 1.5));
       const rayDirection = tmpDirWorld.clone().negate();
       raycaster.set(rayOrigin, rayDirection);
-      const intersects = raycaster.intersectObject(raycastTarget, true);
 
-      // minimal debug: log first hit count for the first ray only
-      if (i === 0) {
-        console.log('[OrbRenderer] raycast sample count', { meshName: mesh.name, usedBaked: !!mesh.isSkinnedMesh, intersectsCount: intersects.length, rayOrigin: rayOrigin.toArray(), rayDirection: rayDirection.toArray() });
-      }
+      if (canCompareSides) raycastMaterial.side = THREE.FrontSide;
+      const frontIntersects = raycaster.intersectObject(raycastTarget, true);
+      if (frontIntersects.length > 0) frontSideHits += 1;
+
+      if (canCompareSides) raycastMaterial.side = THREE.DoubleSide;
+      const intersects = raycaster.intersectObject(raycastTarget, true);
+      if (intersects.length > 0) doubleSideHits += 1;
 
       if (intersects && intersects.length > 0) {
         const p = intersects[0].point.clone();
         // Use the original mesh's local space for overlay placement
         mesh.worldToLocal(p);
-        projectedVerts.push(p.x, p.y, p.z);
-      } else {
-        // Fallback: project from the actual mesh center in world space
-        const fallbackWorld = worldCenter.clone().add(tmpDirWorld.clone().multiplyScalar(worldRadius * 0.95));
-        const fallbackLocal = fallbackWorld.clone();
-        mesh.worldToLocal(fallbackLocal);
-        projectedVerts.push(fallbackLocal.x, fallbackLocal.y, fallbackLocal.z);
+        hitPoints[i] = p;
       }
+    }
+
+    if (canCompareSides) raycastMaterial.side = originalRaycastSide;
+
+    // Keep only triangles whose three geodesic directions hit the real face.
+    // This deliberately removes the old spherical fallback for a clean visual
+    // diagnosis: no hit means no node and no line.
+    const projectedVerts = [];
+    const projectedIndices = [];
+    const pointIndex = new Map();
+    const addHitPoint = (sourceIndex) => {
+      let index = pointIndex.get(sourceIndex);
+      if (index === undefined) {
+        const point = hitPoints[sourceIndex];
+        index = projectedVerts.length / 3;
+        pointIndex.set(sourceIndex, index);
+        projectedVerts.push(point.x, point.y, point.z);
+      }
+      return index;
+    };
+    const sourceIndices = ico.index ? ico.index.array : null;
+    const sourceCount = sourceIndices ? sourceIndices.length : icoPos.count;
+    let retainedTriangles = 0;
+    for (let sourceOffset = 0; sourceOffset < sourceCount; sourceOffset += 3) {
+      const a = sourceIndices ? sourceIndices[sourceOffset] : sourceOffset;
+      const b = sourceIndices ? sourceIndices[sourceOffset + 1] : sourceOffset + 1;
+      const c = sourceIndices ? sourceIndices[sourceOffset + 2] : sourceOffset + 2;
+      if (!hitPoints[a] || !hitPoints[b] || !hitPoints[c]) continue;
+      projectedIndices.push(addHitPoint(a), addHitPoint(b), addHitPoint(c));
+      retainedTriangles += 1;
+    }
+
+    console.log('[OrbRenderer] raycast coverage', {
+      meshName: mesh.name,
+      totalRays: icoPos.count,
+      frontSideHits,
+      doubleSideHits,
+      recoveredByDoubleSide: doubleSideHits - frontSideHits,
+      fallbacksRemoved: icoPos.count - doubleSideHits,
+      retainedTriangles,
+      totalTriangles: sourceCount / 3,
+      usedBaked: !!mesh.isSkinnedMesh,
+    });
+
+    if (retainedTriangles === 0) {
+      console.warn('[OrbRenderer] no projected triangles; fallback sphere intentionally disabled');
+      return;
     }
 
     const projectedGeo = new THREE.BufferGeometry();
     projectedGeo.setAttribute('position', new THREE.Float32BufferAttribute(projectedVerts, 3));
-    if (ico.index) projectedGeo.setIndex(ico.index.array);
+    projectedGeo.setIndex(projectedIndices);
 
     // Build wireframe segments and classify by radial distance for inner/outer fade
     const wire = new THREE.WireframeGeometry(projectedGeo);
