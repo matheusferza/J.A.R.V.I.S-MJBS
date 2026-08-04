@@ -497,8 +497,9 @@ export class OrbRenderer {
     const icoPos = ico.getAttribute('position');
 
     const raycaster = new THREE.Raycaster();
-    const worldCenter = new THREE.Vector3();
-    mesh.getWorldPosition(worldCenter);
+    // Use the bounding sphere center transformed to world space — more accurate for skinned meshes
+    const worldCenter = bs.center.clone();
+    mesh.localToWorld(worldCenter);
 
     // If mesh is skinned, build (and cache) a CPU-baked geometry & temp mesh for raycasting
     let raycastTarget = mesh;
@@ -580,8 +581,8 @@ export class OrbRenderer {
         mesh.worldToLocal(p);
         projectedVerts.push(p.x, p.y, p.z);
       } else {
-        // Fallback: project in world space using worldRadius and convert back to mesh local
-        const fallbackWorld = tmpDirWorld.clone().multiplyScalar(worldRadius * 0.95);
+        // Fallback: project from the actual mesh center in world space
+        const fallbackWorld = worldCenter.clone().add(tmpDirWorld.clone().multiplyScalar(worldRadius * 0.95));
         const fallbackLocal = fallbackWorld.clone();
         mesh.worldToLocal(fallbackLocal);
         projectedVerts.push(fallbackLocal.x, fallbackLocal.y, fallbackLocal.z);
