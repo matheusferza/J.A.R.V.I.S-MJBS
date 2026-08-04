@@ -258,7 +258,9 @@ export class OrbRenderer {
               this._overlays = this._overlays.filter((o) => !overlaysToRemove.includes(o));
           }
 
-          if (child.isSkinnedMesh && !skipOverlay && this._enableOverlays) {
+          const meshNameLower = (child.name || '').toLowerCase();
+          const isFaceMesh = meshNameLower.includes('face') || meshNameLower.includes('head');
+          if (child.isSkinnedMesh && !skipOverlay && this._enableOverlays && isFaceMesh) {
             this._createCircuitOverlay(child);
           }
         }
