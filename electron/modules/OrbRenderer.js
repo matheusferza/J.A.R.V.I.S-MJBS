@@ -516,6 +516,19 @@ export class OrbRenderer {
     const projectionRadiusFactor = 0.90; // smaller factor to keep plexus close to skin (tweak 0.85-0.92)
     const worldRadius = bs.radius * maxWorldScale * projectionRadiusFactor;
 
+    // Debug bounding info to detect shared buffers / incorrect bounding spheres
+    console.log('[OrbRenderer] bounding debug', {
+      meshName: mesh.name,
+      bsRadius: bs.radius,
+      bsCenter: bs.center.toArray(),
+      worldRadius,
+      vertexCount: mesh.geometry.getAttribute('position').count,
+      drawRange: mesh.geometry.drawRange ? { start: mesh.geometry.drawRange.start, count: mesh.geometry.drawRange.count } : null,
+      groups: mesh.geometry.groups && mesh.geometry.groups.length ? mesh.geometry.groups.map(g=>({start:g.start,count:g.count,materialIndex:g.materialIndex})) : null,
+      hasIndex: !!mesh.geometry.index,
+      indexCount: mesh.geometry.index ? mesh.geometry.index.count : null,
+    });
+
     // Create an icosahedron (geodesic) used only for directions; use unit radius and normalize directions
     let detail = 3; // density (reduced to avoid dome effect)
     detail = Math.min(5, Math.max(2, detail));
