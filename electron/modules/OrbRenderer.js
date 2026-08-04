@@ -517,7 +517,7 @@ export class OrbRenderer {
     const worldRadius = bs.radius * maxWorldScale * projectionRadiusFactor;
 
     // Debug bounding info to detect shared buffers / incorrect bounding spheres
-    console.log('[OrbRenderer] bounding debug', {
+    console.log('[OrbRenderer] bounding debug', JSON.stringify({
       meshName: mesh.name,
       bsRadius: bs.radius,
       bsCenter: bs.center.toArray(),
@@ -527,7 +527,7 @@ export class OrbRenderer {
       groups: mesh.geometry.groups && mesh.geometry.groups.length ? mesh.geometry.groups.map(g=>({start:g.start,count:g.count,materialIndex:g.materialIndex})) : null,
       hasIndex: !!mesh.geometry.index,
       indexCount: mesh.geometry.index ? mesh.geometry.index.count : null,
-    });
+    }));
 
     // Create an icosahedron (geodesic) used only for directions; use unit radius and normalize directions
     let detail = 3; // density (reduced to avoid dome effect)
@@ -572,7 +572,7 @@ export class OrbRenderer {
         }
 
         if (!mesh.userData._bakedOverlayMesh) {
-          const mat = new THREE.MeshBasicMaterial({ visible: false });
+          const mat = new THREE.MeshBasicMaterial({ visible: true, opacity: 0.0, transparent: true, depthWrite: false, side: THREE.DoubleSide });
           const tmpMesh = new THREE.Mesh(mesh.userData._bakedOverlayGeometry, mat);
           tmpMesh.matrixAutoUpdate = false;
           mesh.userData._bakedOverlayMesh = tmpMesh;
@@ -581,6 +581,7 @@ export class OrbRenderer {
         // ensure temp mesh world matrix matches skinned mesh
         const bakedMesh = mesh.userData._bakedOverlayMesh;
         bakedMesh.matrixWorld.copy(mesh.matrixWorld);
+        bakedMesh.updateMatrixWorld(true);
 
         // Diagnostic: compare sample baked vertex world positions vs applying mesh transforms
         try {
@@ -602,14 +603,14 @@ export class OrbRenderer {
             };
           });
 
-          console.log('[OrbRenderer] baked-geo diagnostic', {
+          console.log('[OrbRenderer] baked-geo diagnostic', JSON.stringify({
             meshName: mesh.name,
             bakedMeshMatrixWorld: bakedMesh.matrixWorld.elements ? bakedMesh.matrixWorld.elements.slice(0,16) : null,
             meshMatrixWorld: mesh.matrixWorld.elements ? mesh.matrixWorld.elements.slice(0,16) : null,
             samples,
             skeletonPresent: !!mesh.skeleton,
             boneCount: mesh.skeleton ? mesh.skeleton.bones.length : 0,
-          });
+          }));
         } catch (diagErr) {
           console.warn('[OrbRenderer] baked-geo diagnostic failed for', mesh.name, diagErr && diagErr.message);
         }
@@ -699,7 +700,7 @@ export class OrbRenderer {
       retainedTriangles += 1;
     }
 
-    console.log('[OrbRenderer] raycast coverage', {
+    console.log('[OrbRenderer] raycast coverage', JSON.stringify({
       meshName: mesh.name,
       totalRays: icoPos.count,
       frontSideHits,
@@ -709,7 +710,7 @@ export class OrbRenderer {
       retainedTriangles,
       totalTriangles: sourceCount / 3,
       usedBaked: !!mesh.isSkinnedMesh,
-    });
+    }));
 
     if (retainedTriangles === 0) {
       console.warn('[OrbRenderer] no projected triangles; fallback sphere intentionally disabled');
