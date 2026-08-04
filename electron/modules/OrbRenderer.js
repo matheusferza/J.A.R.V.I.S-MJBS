@@ -652,6 +652,20 @@ export class OrbRenderer {
       // This improves hits for partially open meshes (e.g., face meshes missing back-of-head geometry)
       const rayOrigin = worldCenter.clone().add(tmpDirWorld.clone().multiplyScalar(worldRadius * 1.5));
       const rayDirection = tmpDirWorld.clone().negate();
+      const testSphere = new THREE.Sphere(worldCenter.clone(), worldRadius);
+      const testHit = new THREE.Ray(rayOrigin, rayDirection).intersectSphere(testSphere);
+      if (i === 0) {
+        console.log('[OrbRenderer] raycast sample', JSON.stringify({
+          meshName: mesh.name,
+          rayOrigin: rayOrigin.toArray(),
+          rayDirection: rayDirection.toArray(),
+          sphereHit: testHit ? testHit.toArray() : null,
+          worldCenter: worldCenter.toArray(),
+          worldRadius,
+          vertexCount: mesh.geometry.getAttribute('position').count,
+          usedBaked: !!mesh.isSkinnedMesh,
+        }));
+      }
       raycaster.set(rayOrigin, rayDirection);
 
       if (canCompareSides) raycastMaterial.side = THREE.FrontSide;
