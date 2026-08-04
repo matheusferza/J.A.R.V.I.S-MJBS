@@ -634,6 +634,7 @@ export class OrbRenderer {
     const canCompareSides = typeof originalRaycastSide === 'number';
     let frontSideHits = 0;
     let doubleSideHits = 0;
+    console.log('[OrbRenderer] raycast loop start', JSON.stringify({ meshName: mesh.name, usedBaked: !!mesh.isSkinnedMesh }));
 
     const hitPoints = new Array(icoPos.count);
     const tmpVec = new THREE.Vector3();
@@ -872,7 +873,7 @@ export class OrbRenderer {
       outerPointMat.clippingPlanes = [this._clippingPlane]; outerPointMat.clipShadows = true;
     }
   } catch (err) {
-      console.error('[OrbRenderer] _createCircuitOverlay CRASHED for mesh', mesh && mesh.name, err);
+    console.error('[OrbRenderer] _createCircuitOverlay CRASHED for mesh', mesh && mesh.name, err && err.toString(), err && err.stack);
     }
   }
 
