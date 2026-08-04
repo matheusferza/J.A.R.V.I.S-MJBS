@@ -427,6 +427,7 @@ export class OrbRenderer {
   */
 
   _createCircuitOverlay(mesh) {
+    try {
     // Rebuild overlay as a projected geodesic net with styled lines and glowing sprites
     const name = (mesh.name || '').toLowerCase();
     const matName = (mesh.material && mesh.material.name) ? String(mesh.material.name).toLowerCase() : '';
@@ -718,7 +719,9 @@ export class OrbRenderer {
       innerPointMat.clippingPlanes = [this._clippingPlane]; innerPointMat.clipShadows = true;
       outerPointMat.clippingPlanes = [this._clippingPlane]; outerPointMat.clipShadows = true;
     }
-  }
+  } catch (err) {
+      console.error('[OrbRenderer] _createCircuitOverlay CRASHED for mesh', mesh && mesh.name, err);
+    }
 
   _setupScanline() {
     this.scanlineMat = new THREE.ShaderMaterial({
