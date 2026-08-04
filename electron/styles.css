@@ -6,11 +6,11 @@
 
 /* --- Variáveis Globais --- */
 :root {
-  --cyan: #00d9ff;
+  --cyan: #00F0FF;
   --dim: #0a7d95;
-  --ink: #02070c;
+  --ink: #02050E;
   --glass: rgba(5, 32, 42, 0.54);
-  --line: rgba(0, 217, 255, 0.27);
+  --line: rgba(0, 240, 255, 0.20);
 }
 
 /* --- Resets e Base --- */
@@ -21,7 +21,8 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 42%, #063040 0, #020b12 30%, #010408 72%);
+  /* radial gradient: soft light source top-right from deep blue to dark navy */
+  background: radial-gradient(circle at 75% 18%, #001030 0%, #02050E 28%, #02050E 72%);
   color: #b9f5ff;
   font-family: 'Rajdhani', Arial, sans-serif;
   letter-spacing: 0.1em;

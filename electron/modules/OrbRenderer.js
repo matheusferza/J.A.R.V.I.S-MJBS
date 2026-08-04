@@ -173,15 +173,37 @@ export class OrbRenderer {
                 // Make the base material partially transparent to preserve volume behind the overlay
                 mat.transparent = true;
               // Set a conservative dim so the underlying face volume remains visible
-              try { mat.opacity = 0.18; } catch (e) {}
-              // Lighten the color so the face reads clearly during debug (stronger dimming)
-              try { if (mat.color) mat.color.multiplyScalar(0.6); } catch (e) {}
+              try { mat.opacity = 0.06; } catch (e) {}
+              // Tint the base material to a deep desaturated blue so only a dark volume remains
+              try { if (mat.color) mat.color.set(0x001030); } catch (e) {}
                 try { mat.depthWrite = false; } catch (e) {}
                 mat.needsUpdate = true;
               }
             } catch (e) {
               // ignore
             }
+          }
+
+          // Eye styling: prefer emissive cyan glow for iris/eye parts
+          if (isEye) {
+            try {
+              const eyeMat = child.material;
+              if (eyeMat) {
+                if (eyeMat.emissive !== undefined) {
+                  try { eyeMat.emissive.set(0x00F0FF); } catch(e){}
+                  try { eyeMat.emissiveIntensity = 3.0; } catch(e){}
+                  try { if (eyeMat.color) eyeMat.color.set(0x001030); } catch(e){}
+                  try { eyeMat.transparent = false; } catch(e){}
+                  try { eyeMat.depthWrite = false; } catch(e){}
+                  eyeMat.needsUpdate = true;
+                } else {
+                  // Replace with simple emissive material (fast path)
+                  try {
+                    child.material = new THREE.MeshStandardMaterial({ color: 0x001030, emissive: new THREE.Color(0x00F0FF), emissiveIntensity: 3.0, roughness: 0.1, metalness: 0.0 });
+                  } catch (e) { /* ignore */ }
+                }
+              }
+            } catch (e) { }
           }
 
           // If we're skipping overlay for this mesh, ensure any previously created overlay
@@ -630,8 +652,9 @@ export class OrbRenderer {
     if (innerPoints.length) innerPointGeo.setAttribute('position', new THREE.Float32BufferAttribute(innerPoints, 3));
     if (outerPoints.length) outerPointGeo.setAttribute('position', new THREE.Float32BufferAttribute(outerPoints, 3));
 
-    const innerLineMat = new THREE.LineBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending, depthWrite: false });
-    const outerLineMat = new THREE.LineBasicMaterial({ color: 0x4dc9ff, transparent: true, opacity: 0.28, blending: THREE.AdditiveBlending, depthWrite: false });
+    const primaryColor = 0x00F0FF; // cyan blue
+    const innerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.60, blending: THREE.AdditiveBlending, depthWrite: false });
+    const outerLineMat = new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.30, blending: THREE.AdditiveBlending, depthWrite: false });
 
     if (!this._pointSpriteTexture) {
       const size = 64;
@@ -639,15 +662,16 @@ export class OrbRenderer {
       const ctx = canvas.getContext('2d');
       const grad = ctx.createRadialGradient(size/2,size/2,0,size/2,size/2,size/2);
       grad.addColorStop(0,'rgba(255,255,255,1)');
-      grad.addColorStop(0.2,'rgba(128,230,255,0.9)');
-      grad.addColorStop(0.6,'rgba(30,200,255,0.45)');
+      grad.addColorStop(0.08,'rgba(0,240,255,0.98)');
+      grad.addColorStop(0.22,'rgba(0,240,255,0.55)');
+      grad.addColorStop(0.5,'rgba(0,240,255,0.12)');
       grad.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle = grad; ctx.fillRect(0,0,size,size);
       this._pointSpriteTexture = new THREE.CanvasTexture(canvas);
     }
 
-    const innerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: 0x66f0ff, transparent: true, opacity: 0.90, blending: THREE.AdditiveBlending, depthWrite: false });
-    const outerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: 0x66f0ff, transparent: true, opacity: 0.50, blending: THREE.AdditiveBlending, depthWrite: false });
+    const innerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: primaryColor, transparent: true, opacity: 1.0, blending: THREE.AdditiveBlending, depthWrite: false });
+    const outerPointMat = new THREE.SpriteMaterial({ map: this._pointSpriteTexture, color: primaryColor, transparent: true, opacity: 0.65, blending: THREE.AdditiveBlending, depthWrite: false });
 
     const innerLines = innerPositions.length ? new THREE.LineSegments(innerLineGeo, innerLineMat) : null;
     const outerLines = outerPositions.length ? new THREE.LineSegments(outerLineGeo, outerLineMat) : null;
@@ -658,7 +682,7 @@ export class OrbRenderer {
         const sx = posArray[i], sy = posArray[i+1], sz = posArray[i+2];
         const sprite = new THREE.Sprite(mat.clone());
         sprite.position.set(sx, sy, sz);
-        const r = 0.6 + (Math.random() * 0.9);
+        const r = 0.85 + (Math.random() * 0.4); // reduce variance so sprites are small and consistent
         sprite.scale.setScalar(scaleBase * r);
         sprite.__ownerMesh = ownerMesh;
         sprites.push(sprite);
