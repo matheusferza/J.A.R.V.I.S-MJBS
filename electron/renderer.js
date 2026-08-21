@@ -174,7 +174,7 @@ const initModules = async () => {
         }
       }, 500);
     } catch (err) {
-      console.error('❌ Erro ao inicializar OrbRenderer (3D):', err);
+      console.error('❌ Erro ao inicializar OrbRenderer (3D):', err && err.stack ? err.stack : err);
     }
   } catch (err) {
     console.error('❌ Erro geral na inicialização dos módulos:', err);
