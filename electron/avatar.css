@@ -74,17 +74,17 @@
 /* Reator Arc / Órbita (Posicionado ATRÁS do avatar e opaco) */
 #orb {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
-  width: min(38vw, 440px);
-  height: min(38vw, 440px);
+  width: min(30vw, 360px);
+  height: min(30vw, 360px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   display: grid;
   place-items: center;
   z-index: 2; /* Fica atrás do portrait-hologram */
-  opacity: 0.35; /* Círculo suave e translúcido como fundo */
-  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.2));
+  opacity: 0.22; /* Circulo mais discreto para manter o foco no rosto */
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.18));
   transition: opacity 0.4s ease;
 }
 

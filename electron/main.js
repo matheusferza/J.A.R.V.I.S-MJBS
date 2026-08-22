@@ -27,6 +27,7 @@ function createWindow() {
     minWidth: 1024,
     minHeight: 650,
     backgroundColor: '#02070c',
+    icon: path.join(__dirname, 'assets', 'JARVIS-LOGO.png'),
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
