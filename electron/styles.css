@@ -2,15 +2,26 @@
    JARVIS / M.J.B.S AI - MAIN HUD STYLESHEET
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
 /* --- Variáveis Globais --- */
 :root {
   --cyan: #00F0FF;
-  --dim: #0a7d95;
+  --cyan-soft: #4FD8E8;
+  --cyan-dim: #0a7d95;
+  --cyan-deep: #0d3a45;
+  --accent-warm: #FF8C42;
   --ink: #02050E;
   --glass: rgba(5, 32, 42, 0.54);
   --line: rgba(0, 240, 255, 0.20);
+}
+
+.metric b,
+.network-box strong,
+#latency,
+#clock {
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.05em;
 }
 
 /* --- Resets e Base --- */
@@ -22,7 +33,9 @@ body {
   margin: 0;
   overflow: hidden;
   /* radial gradient: soft light source top-right from deep blue to dark navy */
-  background: radial-gradient(circle at 75% 18%, #001030 0%, #02050E 28%, #02050E 72%);
+  background:
+    radial-gradient(circle at 75% 18%, #001d3d 0%, #02050E 32%, #02050E 78%),
+    radial-gradient(circle at 20% 85%, rgba(0, 100, 130, 0.08) 0%, transparent 45%);
   color: #b9f5ff;
   font-family: 'Rajdhani', Arial, sans-serif;
   letter-spacing: 0.1em;
@@ -305,6 +318,11 @@ h1 {
   bottom: 8%;
 }
 
+.jarvis-thinking .orb-label.bottom-label {
+  color: var(--accent-warm);
+  text-shadow: 0 0 8px var(--accent-warm);
+}
+
 /* --- Elementos Internos do Reator Arc --- */
 .ring {
   position: absolute;
@@ -409,7 +427,7 @@ h1 {
   flex: 1;
   overflow-y: auto;
   padding-right: 5px;
-  scrollbar-color: var(--dim) transparent;
+  scrollbar-color: var(--cyan-dim) transparent;
 }
 
 .message {
