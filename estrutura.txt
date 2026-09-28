@@ -1,16 +1,588 @@
 Listagem de caminhos de pasta
-O número de série do volume é 00000075 FC78:F762
+O número de série do volume é 000000CE FC78:F762
 C:.
 |   .env
 |   .env.example
 |   .gitignore
 |   estrutura.txt
+|   LICENSE
 |   package-lock.json
 |   package.json
 |   README.md
+|   startup.log
+|   teste.mp3
 |   
 +---.agents
 +---.git
+|   |   COMMIT_EDITMSG
+|   |   config
+|   |   description
+|   |   FETCH_HEAD
+|   |   HEAD
+|   |   index
+|   |   ORIG_HEAD
+|   |   packed-refs
+|   |   
+|   +---gk
+|   |       config
+|   |       
+|   +---hooks
+|   |       applypatch-msg.sample
+|   |       commit-msg.sample
+|   |       fsmonitor-watchman.sample
+|   |       post-update.sample
+|   |       pre-applypatch.sample
+|   |       pre-commit.sample
+|   |       pre-merge-commit.sample
+|   |       pre-push.sample
+|   |       pre-rebase.sample
+|   |       pre-receive.sample
+|   |       prepare-commit-msg.sample
+|   |       push-to-checkout.sample
+|   |       sendemail-validate.sample
+|   |       update.sample
+|   |       
+|   +---info
+|   |       exclude
+|   |       
+|   +---logs
+|   |   |   HEAD
+|   |   |   
+|   |   \---refs
+|   |       +---heads
+|   |       |   |   backup-before-overwrite-2026-07-30T1329
+|   |       |   |   import-local
+|   |       |   |   main
+|   |       |   |   
+|   |       |   \---agents
+|   |       |           pasted-text-processing
+|   |       |           
+|   |       \---remotes
+|   |           \---origin
+|   |                   backup-before-overwrite-2026-07-30T1329
+|   |                   HEAD
+|   |                   import-local
+|   |                   main
+|   |                   
+|   +---objects
+|   |   +---03
+|   |   |       486ccca12276c259677ad3edbbc6613507e766
+|   |   |       
+|   |   +---04
+|   |   |       890b3ca572986de2d61979aad5fbb562b080a4
+|   |   |       
+|   |   +---05
+|   |   |       181e36fb3640b41bfc8553de37961cf63bc8db
+|   |   |       5b7ca221374129c01c4087f8cfd414a3e43d1a
+|   |   |       
+|   |   +---06
+|   |   |       eef6e61e2e64584f94025c59d7ef527062d2cc
+|   |   |       
+|   |   +---07
+|   |   |       fb6e2ca4387e60b66759719755526defb54772
+|   |   |       
+|   |   +---09
+|   |   |       c8da2856d4f0a86046daab227939762299b512
+|   |   |       
+|   |   +---0a
+|   |   |       2ecf75b695151f78b39267ed93d616165042ab
+|   |   |       904a21cac842ef9fc5f96e5bb37873763bcb1f
+|   |   |       
+|   |   +---0b
+|   |   |       5a75235488280dbeca00a9febc1b1c2fa56cc3
+|   |   |       
+|   |   +---0e
+|   |   |       e76efb3d7f8305a1c60544118962d04f3b29f7
+|   |   |       
+|   |   +---0f
+|   |   |       c88d2eebab18b6c3f1a3a03cf5bcea14c28736
+|   |   |       
+|   |   +---11
+|   |   |       306db20e3b898e4b01c358bcf0c6b80e03adc0
+|   |   |       
+|   |   +---12
+|   |   |       e770a71ad6f6d42209f2d16b77998e3546e33b
+|   |   |       
+|   |   +---13
+|   |   |       00f2b618a6504156de9bebf2893fa79b0b68a3
+|   |   |       343c01a4872ea6eb07ec8c09828467b88929d8
+|   |   |       
+|   |   +---14
+|   |   |       8bc84d7c2d0ba27fdd370ff8bd2cbd317856d2
+|   |   |       b7d9a5ba8fb08ee009f459469339c88912bbb9
+|   |   |       
+|   |   +---15
+|   |   |       7826a58b3c40b7b49541a67fb16e95622fe073
+|   |   |       
+|   |   +---16
+|   |   |       01bbbba5b243fe492016173417e7f04873c937
+|   |   |       fbd0422de375a1c3aa1afb82893a9eba7e18a4
+|   |   |       
+|   |   +---19
+|   |   |       92c3548dafd0d6a3ec61cf3e73ccb8db8291ee
+|   |   |       
+|   |   +---1b
+|   |   |       00490ed85912f6f4191c3af2aa86f0d79a0783
+|   |   |       2a6ba5931924c2eb4ad62e87d1075e5b60452c
+|   |   |       
+|   |   +---1d
+|   |   |       2546807c491e15b1b56f7da1844494e9a51f8b
+|   |   |       
+|   |   +---20
+|   |   |       ccda16c8962f013a46f17a298958b42cb253ff
+|   |   |       
+|   |   +---21
+|   |   |       1c164ba8aa0f2eeb0eaa90e5b47f291a2a830e
+|   |   |       7e2f141b2a49065beaebc3fed4e12f420532b8
+|   |   |       bed3e018fa4125606210d71ed4cbd6e8a42f7e
+|   |   |       
+|   |   +---26
+|   |   |       4291a5765cf7e13f82062f2cba350e8a6e785d
+|   |   |       c4903034d95f3596d34977c3c9e8c44c14e87e
+|   |   |       
+|   |   +---28
+|   |   |       c1a392a84c6c6c8775d7ff55eeb4933f931c53
+|   |   |       
+|   |   +---2b
+|   |   |       9775eaee086db0c58cbc1eb4f192049c6d6fd6
+|   |   |       
+|   |   +---2c
+|   |   |       c5a151eace2b54fae1ffffc909fbec0f51a412
+|   |   |       
+|   |   +---2e
+|   |   |       860584d587c3aaffd94760c0d8d96884fa68ed
+|   |   |       
+|   |   +---2f
+|   |   |       dff4fb5be19a5c8e866f8b06f75db42141493f
+|   |   |       ec6e03ff4cd965adb82dcc9194964129f3cf99
+|   |   |       
+|   |   +---32
+|   |   |       fec67369dd1773e086e625f9f4fc50a3412af0
+|   |   |       
+|   |   +---33
+|   |   |       9415430a7327c8b8e073851e1f9a0580531aae
+|   |   |       
+|   |   +---37
+|   |   |       673a68518c726a254e2fc5bd6c75e9305a99da
+|   |   |       
+|   |   +---38
+|   |   |       3e9dbfcca1089c706fb5ccaf00418e477e6bf7
+|   |   |       
+|   |   +---39
+|   |   |       2bbe88eee1e33a4bb32edefcfbbb057db965c5
+|   |   |       
+|   |   +---3c
+|   |   |       a3a1bff24eef32b8cf717eed5f386eb8ff208f
+|   |   |       
+|   |   +---3d
+|   |   |       2db53717f81ef49f9f35772a564efe9f5be684
+|   |   |       75adce81cf2baa631d4df1110481e0120eb66e
+|   |   |       7761da1602bff03953e13913834d2464b4be1a
+|   |   |       
+|   |   +---3f
+|   |   |       b1be195b9244cb30187cda7753a336698e73a4
+|   |   |       d91d5ef85ee344b4bf1c832613aa3f36b9fa4e
+|   |   |       
+|   |   +---40
+|   |   |       e28680a6a49287780a03ea071c504c631cc1d6
+|   |   |       
+|   |   +---41
+|   |   |       adea918c8e68cbac3298d313a3611a3ec0fe0f
+|   |   |       
+|   |   +---42
+|   |   |       5b5a2e669e00ee4b3ab21a52f53fa9483ee13a
+|   |   |       
+|   |   +---43
+|   |   |       5858f0e82672301b672e320098c201eb930bd2
+|   |   |       
+|   |   +---44
+|   |   |       63ee77b15f3a280bc970ac775eb57a9411607a
+|   |   |       
+|   |   +---46
+|   |   |       3603b55f5e6e9842b5d001d44ca9a19b5aacef
+|   |   |       
+|   |   +---47
+|   |   |       938c1b57f2f6e1e719fb0a6a820c86c12b50fc
+|   |   |       
+|   |   +---48
+|   |   |       684ced312d58e8a382c4f9eb21258a65826365
+|   |   |       
+|   |   +---4a
+|   |   |       84fb80db9cff70efd4412f11d3a92855fc9143
+|   |   |       93ca5a763353cffc110d62bb63e634f78ae32b
+|   |   |       
+|   |   +---4d
+|   |   |       6f97795411c073c9b9db1f0a3edfc504230346
+|   |   |       
+|   |   +---50
+|   |   |       078f547c346df35b24df042bbe2b79b5f423d7
+|   |   |       
+|   |   +---53
+|   |   |       6e5bd7f41e92b5d386ea610caf3ac91a7a1655
+|   |   |       
+|   |   +---54
+|   |   |       63ead263ab4e9a0e1e0fd0702597254b5a82a2
+|   |   |       
+|   |   +---5a
+|   |   |       874fb69f1f59f1f4aa51b8eb1d97993baff89c
+|   |   |       
+|   |   +---5d
+|   |   |       7805deac32ef730b1db9c0779d2d3c2d19b0b0
+|   |   |       8c221dbe80dd6c89f533bb7537745e79a7800e
+|   |   |       
+|   |   +---5e
+|   |   |       4d3d5f6b843fe8fa3854f1342d63c30153b393
+|   |   |       
+|   |   +---61
+|   |   |       aa0247fceb34f97c0c96a382173b4afa639d98
+|   |   |       
+|   |   +---62
+|   |   |       59537a97d932cc68ef4dc12ca2fa4a41e0d189
+|   |   |       b42d095f974eefb4b7d1e9c7679bea54fcff7d
+|   |   |       
+|   |   +---65
+|   |   |       d410b84281f2a252b0c86c707b5a083b4a44a9
+|   |   |       
+|   |   +---66
+|   |   |       22657789a985c14ff3aada640745f9e5dcfebb
+|   |   |       
+|   |   +---68
+|   |   |       2481ac07e5a8931f668d05f26dd8e49c981729
+|   |   |       
+|   |   +---69
+|   |   |       73cbee4fe08c0ce53ac20f2fc480592c1dcf18
+|   |   |       a72cd169c2b9daab0d0d016d3f4bbb4e37b176
+|   |   |       
+|   |   +---6a
+|   |   |       a6c254cfe2646fd6a154992f450e28621625c1
+|   |   |       
+|   |   +---6b
+|   |   |       8b7eb5e7b28618791743c56cd3e92fc1a07d72
+|   |   |       ed187a01996ab7fc14017b7b4b6422d836cb33
+|   |   |       
+|   |   +---6c
+|   |   |       1806f2f3347a3c4a528d3edfd4b09812a11d16
+|   |   |       da53b6a8e53be824f1868ee29a7c82c44b3484
+|   |   |       
+|   |   +---6d
+|   |   |       86122417222c6706da4d0be3b170ca94085e82
+|   |   |       
+|   |   +---6f
+|   |   |       b779d8b3e39cd2614d1c408f60658dd9bb5132
+|   |   |       
+|   |   +---70
+|   |   |       99ebe62547976e9a6887e398b79f6615b7060f
+|   |   |       
+|   |   +---71
+|   |   |       f983cd07d50b0ae144c86ac32678f0d8db80f2
+|   |   |       
+|   |   +---73
+|   |   |       ed044388a0a3225596587ca95ff514abdc5adf
+|   |   |       
+|   |   +---76
+|   |   |       2de7231d8154c7da80b1b44427108a978f39d7
+|   |   |       62b4f165d0a3244b39c2f4cf7c031b634d22cc
+|   |   |       
+|   |   +---78
+|   |   |       64dd34dc08deee3b582642ee63f423ba335380
+|   |   |       e8ec0a7f724f8aa7a981cc988a9042731d2229
+|   |   |       
+|   |   +---79
+|   |   |       d7923d0fa93dab6f2426082a416f5b3313da05
+|   |   |       eb4900c17baa55635aa1d606fcbcdc11c56d79
+|   |   |       
+|   |   +---7a
+|   |   |       bb4b3ff86ab8caa6e34174c268efa3dc3fb01a
+|   |   |       
+|   |   +---7b
+|   |   |       6da9fc14065cd23925c624ac3369f64431804f
+|   |   |       
+|   |   +---7c
+|   |   |       98f48e033d2dcfbf02697755f2b693231d556f
+|   |   |       
+|   |   +---7d
+|   |   |       064b82f1fa3632b967d3f32ab46eedb55b2394
+|   |   |       9aea141873a1b371f0ba692ec56b1f690ecc8f
+|   |   |       
+|   |   +---7e
+|   |   |       b38eaaf04fa659b74ac2240a429ab7898ce261
+|   |   |       
+|   |   +---88
+|   |   |       60c49fde8b0e0cf12e79dfa385c664e3921996
+|   |   |       7226f9ac4e06eb391f618b80f536264756775e
+|   |   |       e5ae0efad3b37ab186c7b5d6f0642da3aabfd2
+|   |   |       
+|   |   +---8b
+|   |   |       137891791fe96927ad78e64b0aad7bded08bdc
+|   |   |       
+|   |   +---8c
+|   |   |       65a455299fbd4e0e32992d0d934cd5e1db6269
+|   |   |       
+|   |   +---8e
+|   |   |       cc588bfa73df3861c01a1a6884275c3be84ae5
+|   |   |       
+|   |   +---8f
+|   |   |       7c5e0dffae4eb1f439353cc9e0d227fc12287e
+|   |   |       
+|   |   +---90
+|   |   |       e4232ec6846b376aa49c9507bc512a386fb7fd
+|   |   |       
+|   |   +---92
+|   |   |       35db58a0b944fc4f3c007f1c93de6964439530
+|   |   |       
+|   |   +---93
+|   |   |       d576ee06bd37259a532158e1b0b5fd4ee04688
+|   |   |       
+|   |   +---94
+|   |   |       32c44cf3d7a69d325d822d88b6b401f7325454
+|   |   |       
+|   |   +---96
+|   |   |       11132e8a43d94b7fcfc8826f1a217bba2471e0
+|   |   |       
+|   |   +---99
+|   |   |       c52fab872a293697c5f8f3843f0c36c1f0a317
+|   |   |       
+|   |   +---9c
+|   |   |       083220d6a943167af633884c152e545ee6dcee
+|   |   |       f557e166424a1177b07906ef46f5749d93fbc4
+|   |   |       
+|   |   +---9e
+|   |   |       02c9059327b94f82a9e3168fed13a160143c11
+|   |   |       
+|   |   +---9f
+|   |   |       b85f3d2c1005b8ed3a5c78e36a6e56d57cff1b
+|   |   |       ce9aee5d5d9d73aff655e0549dcefa3621a803
+|   |   |       fabe17daee789895098643b03c192564917f63
+|   |   |       
+|   |   +---a2
+|   |   |       99d2233091573242f650d99c0986a98f0f0f62
+|   |   |       
+|   |   +---a4
+|   |   |       792c5ceb109de9506362729fe52240828d3145
+|   |   |       
+|   |   +---a5
+|   |   |       0d07e34f8997e41fb000c42e0b002f9c0e6f47
+|   |   |       
+|   |   +---a8
+|   |   |       02ee100907e37f046289229261564616c65af0
+|   |   |       7d7bf17b1583bdc4859ea3801b0f3e88d083fe
+|   |   |       837ef53171ef83c97db8a9f6906a8803301a7a
+|   |   |       
+|   |   +---aa
+|   |   |       980d04edb2cb4e8516276a9d3f12438b0d3024
+|   |   |       
+|   |   +---ac
+|   |   |       a0d666349578ec2445ca4b35fecd2446f838e1
+|   |   |       
+|   |   +---ad
+|   |   |       4cf1a97fac346555b56f9deefe30b24d0e4887
+|   |   |       
+|   |   +---ae
+|   |   |       14cbcaa351d3abbb92636e3fbf9ee2a4e7e6f6
+|   |   |       b1cf7a74b0481562e0a9b8b4ebb6a0c1199b38
+|   |   |       
+|   |   +---af
+|   |   |       1ade5b715b76015e6d36ef40adf630b5add885
+|   |   |       
+|   |   +---b1
+|   |   |       f4415182ed1d2d23ca2c7340c436c81f536a44
+|   |   |       
+|   |   +---b3
+|   |   |       b511906d0911663911ad37201c725b5c9af9b1
+|   |   |       
+|   |   +---b4
+|   |   |       19f72e85c2757723f9c9512acf1f18546109c5
+|   |   |       9745b43461fe2457b0492a8e13b1283ecde12c
+|   |   |       
+|   |   +---b5
+|   |   |       69c4b7984242008f1c3c77a8ccb64f4bb0975e
+|   |   |       
+|   |   +---b6
+|   |   |       25e9da4573032deec8bf713077255c0a073089
+|   |   |       8ef17d0d6e630201b72936fecf1307d1ba414f
+|   |   |       
+|   |   +---b7
+|   |   |       7f3845802319182bce06ab1ea11d6c5f6eaa67
+|   |   |       df16a8327408b68e086a5b1dac7c4079df707f
+|   |   |       
+|   |   +---b8
+|   |   |       36eb0c37efc5b9b046bba304948c977909be27
+|   |   |       
+|   |   +---ba
+|   |   |       1048f2446216cb669b69ddf4a945020ba60d8f
+|   |   |       c8ec4d1433ff21d93d7e750db4bdbfd957b2b1
+|   |   |       f35e0aed16f974ef6cbdcf4150c410cdbf1063
+|   |   |       
+|   |   +---bb
+|   |   |       bf6048f3f8cc7faa5a08f90ec770eeecafc687
+|   |   |       
+|   |   +---bc
+|   |   |       4b70ae61bc983b35ed584b01271e5339fea7ea
+|   |   |       c67178e997a2dcdefb51dc82e17f2df6af4b07
+|   |   |       
+|   |   +---be
+|   |   |       f3159e01aee38e5ecfc33eb46c8d92ccb2e8af
+|   |   |       
+|   |   +---bf
+|   |   |       87f96b9e2b9243ed1f1d30cd88f2674e4f0ed9
+|   |   |       
+|   |   +---c3
+|   |   |       f1b57683e1d942b1aa66f2ee0fbe8fa4495398
+|   |   |       
+|   |   +---c4
+|   |   |       3d70e256d75a14a3575331b7386c56f30549e8
+|   |   |       d3b6def6e52ffddba3db7db91646f528dc73c6
+|   |   |       
+|   |   +---c7
+|   |   |       6d3cf436a49174a48d3aa52ca941d506a016c8
+|   |   |       af85598fc294aefb8bf262951f8554e554ea41
+|   |   |       e4118e74b3d1ca440be1034884776a4f1e0eaa
+|   |   |       
+|   |   +---c8
+|   |   |       687d906e688464013030e8610d8dd3f4a92dd9
+|   |   |       a48ffc22b73b6cd25811831a19b0722bab7943
+|   |   |       
+|   |   +---c9
+|   |   |       0542290b47df4725ec4781ea4d87e0bee609d3
+|   |   |       b54f322efdc66fa36e5a5fcd75c02a4adbf4af
+|   |   |       
+|   |   +---cb
+|   |   |       14ae7a8e42ad93c22bce511a4cf2354ec1baa3
+|   |   |       38d6c184ec8fd184d4a9693872db407aa04a39
+|   |   |       aed5c28bf472a3efb904b54d1465b6d77862aa
+|   |   |       
+|   |   +---cd
+|   |   |       60b6dea2ab4099beced7b4a944e8b1db16f1ad
+|   |   |       
+|   |   +---cf
+|   |   |       bf715f5bb090365077de9c331daf23205825b3
+|   |   |       
+|   |   +---d0
+|   |   |       373a284bed8a9f1b7ad1f00a5154a5b928d82e
+|   |   |       
+|   |   +---d1
+|   |   |       58a203d327d2a8b8bfb529a9d448d2cbfce12c
+|   |   |       
+|   |   +---d3
+|   |   |       c9f8e3d7e74beb118d8786cbd32db0762805c5
+|   |   |       
+|   |   +---d4
+|   |   |       2b0b8825ea246518a2928be7142c4a37bd6fcb
+|   |   |       
+|   |   +---d6
+|   |   |       6999a643837dc12117c8e1442054cdf30dbee4
+|   |   |       c85b3d0d3ceefe95af1e72b8b94314856ae7a7
+|   |   |       
+|   |   +---db
+|   |   |       5873aaae2d4e8e5eb835d38d6a95194b22f7e9
+|   |   |       
+|   |   +---dc
+|   |   |       3290946f51d25b8c3e1832714e997948bd2dfc
+|   |   |       83e1a31dd552e7ef053b39c3820f80a65bd9d4
+|   |   |       
+|   |   +---dd
+|   |   |       40bbabedaca86fa9e459fb7123e26d436fb93e
+|   |   |       
+|   |   +---e1
+|   |   |       e1abc4322dcfc2776143a3ecf2ab91e0bf53d2
+|   |   |       
+|   |   +---e2
+|   |   |       dd5ff6b77b254390add05a1d020a51f3966885
+|   |   |       
+|   |   +---e7
+|   |   |       31f8088667f06012d4a43d18c0b6d7ae33ec3b
+|   |   |       
+|   |   +---ea
+|   |   |       72e6bfa69ac9e6addac10def13dcc66711378d
+|   |   |       cfc3f9a523640a0d65e6e6e43d73b9aef1e706
+|   |   |       
+|   |   +---ed
+|   |   |       3c9e9b197c18f5a8c0520d003416aa52649425
+|   |   |       
+|   |   +---f0
+|   |   |       1f5526650d8197cf001c2e15afd620545ae387
+|   |   |       
+|   |   +---f1
+|   |   |       759aa10b9a50aefea891097ccbe930847b88e2
+|   |   |       76a76fbf3beaf33e1d03841532b3b5745b7e1c
+|   |   |       c0198111e49332df22c17c3df4e8f2a1d791b0
+|   |   |       
+|   |   +---f2
+|   |   |       1e457d2b82bbb0e73f877f4488bf898c9037ea
+|   |   |       
+|   |   +---f3
+|   |   |       38c31e7d069307455e4c9feec2dd88d6178d33
+|   |   |       
+|   |   +---f6
+|   |   |       e2381a250e58f53b6d9569c382bc82e6be78a9
+|   |   |       
+|   |   +---f7
+|   |   |       9ffb3de184604361115583d8126265e3c8ffc5
+|   |   |       
+|   |   +---f8
+|   |   |       6001ccbb4dc0aef18ab85d48e205d532a2c2d5
+|   |   |       
+|   |   +---fa
+|   |   |       bc8fa4e1454898a4dc7dc8b00f15bf7d652d78
+|   |   |       dbe6ddb208b82633dd8fe8f56ed16e1239ff0e
+|   |   |       fb119256e7adc56a272c5dfc78e73fb1040024
+|   |   |       
+|   |   +---fc
+|   |   |       17da6140adc383c97cffd8bf37f382b497a889
+|   |   |       
+|   |   +---fd
+|   |   |       c95d95da85cb12225590a0856b1fd22e256c6b
+|   |   |       
+|   |   +---fe
+|   |   |       95194b3b9553d8b75a718326f16695e09ff22a
+|   |   |       eccbcdf88c0973cdc0b4a3f1794cab3ea83771
+|   |   |       
+|   |   +---info
+|   |   \---pack
+|   +---refs
+|   |   +---agents
+|   |   |   \---f43c95a8-dcfa-4c95-bab1-74f788a9e5e3
+|   |   |       \---checkpoints
+|   |   |           \---turn
+|   |   |                   10
+|   |   |                   11
+|   |   |                   9
+|   |   |                   
+|   |   +---codex
+|   |   |   \---turn-diffs
+|   |   |       \---checkpoints
+|   |   |           \---0908c71dfd40411d4cfd9c47ac51ac0a314c7ee80dea475e770e9344560e8586
+|   |   |               +---7e62466a6a5094306227792d97c43eb75b82069398d43503cd62b8bb7c3f5955
+|   |   |               |   \---1785874988391
+|   |   |               +---82be54912b7e86ca73dc6b220906edc955f896019fec64918c48d35d6c100b93
+|   |   |               |   \---1785875502631
+|   |   |               +---a78c571a36d37d00302f1d997c789dd1998f7ff122e907a35f64b596504480e4
+|   |   |               |   \---1785875145002
+|   |   |               \---ce8f5b0e3c51305866fdcef176984e29e957f4ee8e3e08593291bed2652f807e
+|   |   |                   \---1785875811366
+|   |   +---heads
+|   |   |       main
+|   |   |       
+|   |   +---remotes
+|   |   |   \---origin
+|   |   |           HEAD
+|   |   |           main
+|   |   |           
+|   |   \---tags
+|   \---worktrees
+|       \---pasted-text-processing
+|           |   COMMIT_EDITMSG
+|           |   commondir
+|           |   FETCH_HEAD
+|           |   gitdir
+|           |   HEAD
+|           |   index
+|           |   ORIG_HEAD
+|           |   
+|           +---logs
+|           |       HEAD
+|           |       
+|           \---refs
 +---.venv
 |   |   pyvenv.cfg
 |   |   
@@ -15495,6 +16067,8 @@ C:.
 |   |   |   .gitkeep
 |   |   |   free_basemesh_head_man.glb
 |   |   |   head.gltf
+|   |   |   jarvis-face.vrm
+|   |   |   JARVIS-LOGO.png
 |   |   |   license.txt
 |   |   |   scene.bin
 |   |   |   
@@ -15592,6 +16166,420 @@ C:.
 |   |                   utils.js.map
 |   |                   
 |   +---@fortawesome
+|   +---@pixiv
+|   |   +---three-vrm
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |   |   three-vrm.cjs
+|   |   |   |   |   three-vrm.min.cjs
+|   |   |   |   |   three-vrm.module.js
+|   |   |   |   |   three-vrm.module.min.js
+|   |   |   |   |   
+|   |   |   |   \---nodes
+|   |   |   |           index.cjs
+|   |   |   |           index.min.cjs
+|   |   |   |           index.module.js
+|   |   |   |           index.module.min.js
+|   |   |   |           
+|   |   |   \---types
+|   |   |       |   index.d.ts
+|   |   |       |   VRM.d.ts
+|   |   |       |   VRMLoaderPlugin.d.ts
+|   |   |       |   VRMLoaderPluginOptions.d.ts
+|   |   |       |   VRMParameters.d.ts
+|   |   |       |   
+|   |   |       +---nodes
+|   |   |       |       index.d.ts
+|   |   |       |       
+|   |   |       +---utils
+|   |   |       |       attributeGetComponentCompat.d.ts
+|   |   |       |       attributeSetComponentCompat.d.ts
+|   |   |       |       mat4InvertCompat.d.ts
+|   |   |       |       math.d.ts
+|   |   |       |       Matrix4InverseCache.d.ts
+|   |   |       |       quatInvertCompat.d.ts
+|   |   |       |       
+|   |   |       \---VRMUtils
+|   |   |               combineMorphs.d.ts
+|   |   |               combineSkeletons.d.ts
+|   |   |               deepDispose.d.ts
+|   |   |               index.d.ts
+|   |   |               removeUnnecessaryJoints.d.ts
+|   |   |               removeUnnecessaryVertices.d.ts
+|   |   |               rotateVRM0.d.ts
+|   |   |               
+|   |   +---three-vrm-core
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |       three-vrm-core.cjs
+|   |   |   |       three-vrm-core.min.cjs
+|   |   |   |       three-vrm-core.module.js
+|   |   |   |       three-vrm-core.module.min.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |       |   index.d.ts
+|   |   |       |   VRMCore.d.ts
+|   |   |       |   VRMCoreLoaderPlugin.d.ts
+|   |   |       |   VRMCoreLoaderPluginOptions.d.ts
+|   |   |       |   VRMCoreParameters.d.ts
+|   |   |       |   
+|   |   |       +---expressions
+|   |   |       |       index.d.ts
+|   |   |       |       VRMExpression.d.ts
+|   |   |       |       VRMExpressionBind.d.ts
+|   |   |       |       VRMExpressionLoaderPlugin.d.ts
+|   |   |       |       VRMExpressionManager.d.ts
+|   |   |       |       VRMExpressionMaterialColorBind.d.ts
+|   |   |       |       VRMExpressionMaterialColorType.d.ts
+|   |   |       |       VRMExpressionMorphTargetBind.d.ts
+|   |   |       |       VRMExpressionOverrideType.d.ts
+|   |   |       |       VRMExpressionPresetName.d.ts
+|   |   |       |       VRMExpressionTextureTransformBind.d.ts
+|   |   |       |       
+|   |   |       +---firstPerson
+|   |   |       |       index.d.ts
+|   |   |       |       VRMFirstPerson.d.ts
+|   |   |       |       VRMFirstPersonLoaderPlugin.d.ts
+|   |   |       |       VRMFirstPersonMeshAnnotation.d.ts
+|   |   |       |       VRMFirstPersonMeshAnnotationType.d.ts
+|   |   |       |       
+|   |   |       +---humanoid
+|   |   |       |   |   index.d.ts
+|   |   |       |   |   VRMHumanBone.d.ts
+|   |   |       |   |   VRMHumanBoneList.d.ts
+|   |   |       |   |   VRMHumanBoneName.d.ts
+|   |   |       |   |   VRMHumanBoneParentMap.d.ts
+|   |   |       |   |   VRMHumanBones.d.ts
+|   |   |       |   |   VRMHumanoid.d.ts
+|   |   |       |   |   VRMHumanoidLoaderPlugin.d.ts
+|   |   |       |   |   VRMHumanoidLoaderPluginOptions.d.ts
+|   |   |       |   |   VRMHumanoidRig.d.ts
+|   |   |       |   |   VRMPose.d.ts
+|   |   |       |   |   VRMPoseTransform.d.ts
+|   |   |       |   |   VRMRequiredHumanBoneName.d.ts
+|   |   |       |   |   VRMRig.d.ts
+|   |   |       |   |   
+|   |   |       |   \---helpers
+|   |   |       |           index.d.ts
+|   |   |       |           VRMHumanoidHelper.d.ts
+|   |   |       |           
+|   |   |       +---lookAt
+|   |   |       |   |   index.d.ts
+|   |   |       |   |   VRMLookAt.d.ts
+|   |   |       |   |   VRMLookAtApplier.d.ts
+|   |   |       |   |   VRMLookAtBoneApplier.d.ts
+|   |   |       |   |   VRMLookAtExpressionApplier.d.ts
+|   |   |       |   |   VRMLookAtLoaderPlugin.d.ts
+|   |   |       |   |   VRMLookAtLoaderPluginOptions.d.ts
+|   |   |       |   |   VRMLookAtRangeMap.d.ts
+|   |   |       |   |   VRMLookAtTypeName.d.ts
+|   |   |       |   |   
+|   |   |       |   +---helpers
+|   |   |       |   |   |   index.d.ts
+|   |   |       |   |   |   VRMLookAtHelper.d.ts
+|   |   |       |   |   |   
+|   |   |       |   |   \---utils
+|   |   |       |   |           FanBufferGeometry.d.ts
+|   |   |       |   |           LineAndSphereBufferGeometry.d.ts
+|   |   |       |   |           
+|   |   |       |   \---utils
+|   |   |       |           calcAzimuthAltitude.d.ts
+|   |   |       |           sanitizeAngle.d.ts
+|   |   |       |           
+|   |   |       +---meta
+|   |   |       |       index.d.ts
+|   |   |       |       VRM0Meta.d.ts
+|   |   |       |       VRM1Meta.d.ts
+|   |   |       |       VRMMeta.d.ts
+|   |   |       |       VRMMetaLoaderPlugin.d.ts
+|   |   |       |       VRMMetaLoaderPluginOptions.d.ts
+|   |   |       |       
+|   |   |       \---utils
+|   |   |               getWorldQuaternionLite.d.ts
+|   |   |               gltfExtractPrimitivesFromNode.d.ts
+|   |   |               quatInvertCompat.d.ts
+|   |   |               renameMaterialProperty.d.ts
+|   |   |               resolveURL.d.ts
+|   |   |               saturate.d.ts
+|   |   |               
+|   |   +---three-vrm-materials-hdr-emissive-multiplier
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |       three-vrm-materials-hdr-emissive-multiplier.cjs
+|   |   |   |       three-vrm-materials-hdr-emissive-multiplier.min.cjs
+|   |   |   |       three-vrm-materials-hdr-emissive-multiplier.module.js
+|   |   |   |       three-vrm-materials-hdr-emissive-multiplier.module.min.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |           index.d.ts
+|   |   |           VRMMaterialsHDREmissiveMultiplierLoaderPlugin.d.ts
+|   |   |           
+|   |   +---three-vrm-materials-mtoon
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |   |   three-vrm-materials-mtoon.cjs
+|   |   |   |   |   three-vrm-materials-mtoon.min.cjs
+|   |   |   |   |   three-vrm-materials-mtoon.module.js
+|   |   |   |   |   three-vrm-materials-mtoon.module.min.js
+|   |   |   |   |   
+|   |   |   |   \---nodes
+|   |   |   |           index.cjs
+|   |   |   |           index.min.cjs
+|   |   |   |           index.module.js
+|   |   |   |           index.module.min.js
+|   |   |   |           
+|   |   |   \---types
+|   |   |       |   GLTFMToonMaterialParamsAssignHelper.d.ts
+|   |   |       |   index.d.ts
+|   |   |       |   MToonMaterial.d.ts
+|   |   |       |   MToonMaterialDebugMode.d.ts
+|   |   |       |   MToonMaterialLoaderPlugin.d.ts
+|   |   |       |   MToonMaterialLoaderPluginOptions.d.ts
+|   |   |       |   MToonMaterialOutlineWidthMode.d.ts
+|   |   |       |   MToonMaterialParameters.d.ts
+|   |   |       |   
+|   |   |       +---nodes
+|   |   |       |   |   immutableNodes.d.ts
+|   |   |       |   |   index.d.ts
+|   |   |       |   |   materialReferences.d.ts
+|   |   |       |   |   MToonAnimatedUVNode.d.ts
+|   |   |       |   |   MToonLightingModel.d.ts
+|   |   |       |   |   MToonNodeMaterial.d.ts
+|   |   |       |   |   MToonNodeMaterialParameters.d.ts
+|   |   |       |   |   mtoonParametricRim.d.ts
+|   |   |       |   |   warningIfPre161.d.ts
+|   |   |       |   |   
+|   |   |       |   \---utils
+|   |   |       |           FnCompat.d.ts
+|   |   |       |           
+|   |   |       \---utils
+|   |   |               getTextureColorSpace.d.ts
+|   |   |               setTextureColorSpace.d.ts
+|   |   |               
+|   |   +---three-vrm-materials-v0compat
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |       three-vrm-materials-v0compat.cjs
+|   |   |   |       three-vrm-materials-v0compat.min.cjs
+|   |   |   |       three-vrm-materials-v0compat.module.js
+|   |   |   |       three-vrm-materials-v0compat.module.min.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |       |   index.d.ts
+|   |   |       |   VRMMaterialsV0CompatPlugin.d.ts
+|   |   |       |   
+|   |   |       \---utils
+|   |   |               gammaEOTF.d.ts
+|   |   |               
+|   |   +---three-vrm-node-constraint
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |       three-vrm-node-constraint.cjs
+|   |   |   |       three-vrm-node-constraint.min.cjs
+|   |   |   |       three-vrm-node-constraint.module.js
+|   |   |   |       three-vrm-node-constraint.module.min.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |       |   index.d.ts
+|   |   |       |   VRMAimConstraint.d.ts
+|   |   |       |   VRMNodeConstraint.d.ts
+|   |   |       |   VRMNodeConstraintLoaderPlugin.d.ts
+|   |   |       |   VRMNodeConstraintLoaderPluginOptions.d.ts
+|   |   |       |   VRMNodeConstraintManager.d.ts
+|   |   |       |   VRMRollConstraint.d.ts
+|   |   |       |   VRMRotationConstraint.d.ts
+|   |   |       |   
+|   |   |       +---helpers
+|   |   |       |       index.d.ts
+|   |   |       |       VRMNodeConstraintHelper.d.ts
+|   |   |       |       
+|   |   |       \---utils
+|   |   |               decomposePosition.d.ts
+|   |   |               decomposeRotation.d.ts
+|   |   |               mat4InvertCompat.d.ts
+|   |   |               Matrix4InverseCache.d.ts
+|   |   |               quatInvertCompat.d.ts
+|   |   |               traverseAncestorsFromRoot.d.ts
+|   |   |               
+|   |   +---three-vrm-springbone
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   +---lib
+|   |   |   |       three-vrm-springbone.cjs
+|   |   |   |       three-vrm-springbone.min.cjs
+|   |   |   |       three-vrm-springbone.module.js
+|   |   |   |       three-vrm-springbone.module.min.js
+|   |   |   |       
+|   |   |   \---types
+|   |   |       |   index.d.ts
+|   |   |       |   VRMSpringBoneCollider.d.ts
+|   |   |       |   VRMSpringBoneColliderGroup.d.ts
+|   |   |       |   VRMSpringBoneColliderShape.d.ts
+|   |   |       |   VRMSpringBoneColliderShapeCapsule.d.ts
+|   |   |       |   VRMSpringBoneColliderShapePlane.d.ts
+|   |   |       |   VRMSpringBoneColliderShapeSphere.d.ts
+|   |   |       |   VRMSpringBoneJoint.d.ts
+|   |   |       |   VRMSpringBoneJointSettings.d.ts
+|   |   |       |   VRMSpringBoneLoaderPlugin.d.ts
+|   |   |       |   VRMSpringBoneLoaderPluginOptions.d.ts
+|   |   |       |   VRMSpringBoneManager.d.ts
+|   |   |       |   
+|   |   |       +---helpers
+|   |   |       |   |   index.d.ts
+|   |   |       |   |   VRMSpringBoneColliderHelper.d.ts
+|   |   |       |   |   VRMSpringBoneJointHelper.d.ts
+|   |   |       |   |   
+|   |   |       |   \---utils
+|   |   |       |           ColliderShapeBufferGeometry.d.ts
+|   |   |       |           ColliderShapeCapsuleBufferGeometry.d.ts
+|   |   |       |           ColliderShapePlaneBufferGeometry.d.ts
+|   |   |       |           ColliderShapeSphereBufferGeometry.d.ts
+|   |   |       |           SpringBoneBufferGeometry.d.ts
+|   |   |       |           
+|   |   |       \---utils
+|   |   |               getWorldQuaternionLite.d.ts
+|   |   |               lowestCommonAncestor.d.ts
+|   |   |               mat4InvertCompat.d.ts
+|   |   |               Matrix4InverseCache.d.ts
+|   |   |               traverseAncestorsFromRoot.d.ts
+|   |   |               traverseChildrenUntilConditionMet.d.ts
+|   |   |               
+|   |   +---types-vrm-0.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           BlendShape.d.ts
+|   |   |           BlendShapeBind.d.ts
+|   |   |           BlendShapeGroup.d.ts
+|   |   |           BlendShapeMaterialBind.d.ts
+|   |   |           BlendShapePresetName.d.ts
+|   |   |           FirstPerson.d.ts
+|   |   |           FirstPersonDegreeMap.d.ts
+|   |   |           FirstPersonMeshAnnotation.d.ts
+|   |   |           Humanoid.d.ts
+|   |   |           HumanoidBone.d.ts
+|   |   |           HumanoidBoneName.d.ts
+|   |   |           index.d.ts
+|   |   |           Material.d.ts
+|   |   |           Meta.d.ts
+|   |   |           SecondaryAnimation.d.ts
+|   |   |           SecondaryAnimationCollider.d.ts
+|   |   |           SecondaryAnimationColliderGroup.d.ts
+|   |   |           SecondaryAnimationSpring.d.ts
+|   |   |           Vector3.d.ts
+|   |   |           VRM.d.ts
+|   |   |           
+|   |   +---types-vrmc-materials-hdr-emissive-multiplier-1.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           index.d.ts
+|   |   |           VRMCMaterialsHDREmissiveMultiplier.d.ts
+|   |   |           
+|   |   +---types-vrmc-materials-mtoon-1.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           index.d.ts
+|   |   |           MaterialsMToonOutlineWidthMode.d.ts
+|   |   |           MaterialsMToonShadingShiftTextureInfo.d.ts
+|   |   |           MaterialsMToonTextureInfo.d.ts
+|   |   |           VRMCMaterialsMToon.d.ts
+|   |   |           
+|   |   +---types-vrmc-node-constraint-1.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           AimConstraint.d.ts
+|   |   |           Constraint.d.ts
+|   |   |           index.d.ts
+|   |   |           RollConstraint.d.ts
+|   |   |           RotationConstraint.d.ts
+|   |   |           VRMCNodeConstraint.d.ts
+|   |   |           
+|   |   +---types-vrmc-springbone-1.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           index.d.ts
+|   |   |           SpringBoneCollider.d.ts
+|   |   |           SpringBoneColliderCapsule.d.ts
+|   |   |           SpringBoneColliderGroup.d.ts
+|   |   |           SpringBoneColliderShape.d.ts
+|   |   |           SpringBoneColliderSphere.d.ts
+|   |   |           SpringBoneJoint.d.ts
+|   |   |           SpringBoneSpring.d.ts
+|   |   |           VRMCSpringBone.d.ts
+|   |   |           
+|   |   +---types-vrmc-springbone-extended-collider-1.0
+|   |   |   |   LICENSE
+|   |   |   |   package.json
+|   |   |   |   README.md
+|   |   |   |   
+|   |   |   \---types
+|   |   |           index.d.ts
+|   |   |           SpringBoneExtendedColliderShape.d.ts
+|   |   |           SpringBoneExtendedColliderShapeCapsule.d.ts
+|   |   |           SpringBoneExtendedColliderShapePlane.d.ts
+|   |   |           SpringBoneExtendedColliderShapeSphere.d.ts
+|   |   |           VRMCSpringBoneExtendedCollider.d.ts
+|   |   |           
+|   |   \---types-vrmc-vrm-1.0
+|   |       |   LICENSE
+|   |       |   package.json
+|   |       |   README.md
+|   |       |   
+|   |       \---types
+|   |               Expression.d.ts
+|   |               ExpressionMaterialColorBind.d.ts
+|   |               ExpressionMaterialColorType.d.ts
+|   |               ExpressionMorphTargetBind.d.ts
+|   |               ExpressionOverrideType.d.ts
+|   |               ExpressionPresetName.d.ts
+|   |               Expressions.d.ts
+|   |               ExpressionTextureTransformBind.d.ts
+|   |               FirstPerson.d.ts
+|   |               FirstPersonMeshAnnotation.d.ts
+|   |               Humanoid.d.ts
+|   |               HumanoidHumanBone.d.ts
+|   |               HumanoidHumanBoneName.d.ts
+|   |               HumanoidHumanBones.d.ts
+|   |               index.d.ts
+|   |               LookAt.d.ts
+|   |               LookAtRangeMap.d.ts
+|   |               Meta.d.ts
+|   |               VRMCVRM.d.ts
+|   |               
 |   +---@sindresorhus
 |   |   \---is
 |   |       |   license
@@ -18278,6 +19266,7 @@ C:.
     |   requirements.txt
     |   
     +---ai
+    |   |   elevenlabs_provider.py
     |   |   gemini_provider.py
     |   |   local_responses.py
     |   |   offline_provider.py
@@ -18285,6 +19274,7 @@ C:.
     |   |   __init__.py
     |   |   
     |   \---__pycache__
+    |           elevenlabs_provider.cpython-312.pyc
     |           gemini_provider.cpython-312.pyc
     |           local_responses.cpython-312.pyc
     |           offline_provider.cpython-312.pyc
