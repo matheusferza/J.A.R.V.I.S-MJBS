@@ -1,4 +1,6 @@
 .env
+/estrutura.txt
+/teste.mp3
 .cache/
 node_modules/
 ui/node_modules/
